@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Online Ticket Selling</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<th:block th:include="adminNavBar"></th:block>
+<div class="container-fluid">
+    <div class="text-center"><h2>Customer Form</h2></div>
+
+    <form method="post" th:action="@{/newCustomer}" th:object="${customer}"
+          style="max-width: 500px; margin: 0 auto;">
+        <input type="hidden" th:field="*{customerId}">
+        <div class="border border-secondary rounded p-3">
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">NID:</label>
+                <div class="col-sm-8">
+                    <input type="text" th:field="*{nId}" class="form-control" required />
+                </div>
+            </div>
+        </div>
+        <div class="border border-secondary rounded p-3">
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Names:</label>
+                <div class="col-sm-8">
+                    <input type="text" th:field="*{names}" class="form-control" required />
+                </div>
+            </div>
+        </div>
+        <div class="border border-secondary rounded p-3">
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Phone:</label>
+                <div class="col-sm-8">
+                    <input type="tel" th:field="*{phone}" class="form-control" required />
+                </div>
+            </div>
+        </div>
+            <div class="border border-secondary rounded p-3">
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Email:</label>
+                    <div class="col-sm-8">
+                        <input type="email" th:field="*{email}" class="form-control" required />
+                    </div>
+                </div>
+            </div>
+
+                <div class="border border-secondary rounded p-3">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">location:</label>
+                        <div class="col-sm-8">
+                            <input type="text" th:field="*{location}" class="form-control" required />
+                        </div>
+                    </div>
+                </div>
+                    <div class="border border-secondary rounded p-3">
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">date of birth:</label>
+                            <div class="col-sm-8">
+                                <input type="date" th:field="*{dob}" class="form-control" required />
+                            </div>
+                        </div>
+                    </div>
+
+                        <div class="border border-secondary rounded p-3">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">password:</label>
+                                <div class="col-sm-8">
+                                    <input type="password" th:field="*{password}" class="form-control" required />
+                                </div>
+                            </div>
+                        </div>
+                            <div class="border border-secondary rounded p-3">
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Confirm:</label>
+                                    <div class="col-sm-8">
+                                        <input type="password" class="form-control" required />
+                                    </div>
+                                </div>
+                            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary m-2">Save</button>
+                <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()">Cancel</button>
+            </div>
+
+
+    </form>
+
+</div>
+
+</body>
+</html>

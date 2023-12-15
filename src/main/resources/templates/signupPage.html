@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Online Ticket Selling - Sign Up</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Use Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"></script>
+    <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- Include SweetAlert CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+
+    <style>
+        .container {
+            border: 2px solid #ddd;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px; /* Adjust the max-width as needed */
+            margin: 0 auto;
+        }
+
+        .container h1 {
+            text-align: center;
+        }
+
+        .signup-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+<th:block th:include="navBar1"></th:block>
+<div class="container">
+    <h1>Welcome to Online Ticket Selling</h1>
+
+    <!-- Signup Form -->
+    <form method="post" th:action="@{/newCustomer/customer}" th:object="${customer}" class="signup-form" onsubmit="return validateForm()">
+
+        <!-- NID Field -->
+        <div class="mb-3">
+            <label for="nid" class="form-label">NID:</label>
+            <input type="text" th:field="*{nId}" class="form-control" pattern="\d{16}" title="NID must be 16 digits" required />
+        </div>
+
+        <!-- Names Field -->
+        <div class="mb-3">
+            <label for="names" class="form-label">Names:</label>
+            <input type="text" th:field="*{names}" class="form-control" required />
+        </div>
+
+        <!-- Phone Field -->
+        <div class="mb-3">
+            <label for="phone" class="form-label">Phone:</label>
+            <input type="tel" th:field="*{phone}" class="form-control" pattern="07\d{8}" title="Phone must start with 07 and be 10 digits" required />
+        </div>
+
+        <!-- Email Field -->
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" th:field="*{email}" class="form-control" required />
+        </div>
+
+        <!-- Location Field -->
+        <div class="mb-3">
+            <label for="location" class="form-label">Location:</label>
+            <input type="text" th:field="*{location}" class="form-control" required />
+        </div>
+
+        <!-- Date of Birth Field -->
+        <div class="mb-3">
+            <label for="dob" class="form-label">Date of Birth:</label>
+            <input type="date" th:field="*{dob}" class="form-control" id="dob" onchange="validateAge()" required />
+        </div>
+
+        <!-- Password Field -->
+        <div class="mb-3">
+            <label for="password" class="form-label">Password:</label>
+            <input type="password" th:field="*{password}" class="form-control" pattern="^(?!.*\b(?:\d{10}|\b(?:[^\d\W]+[\s\-])+\b)).{8,}$" title="Password must be at least 8 characters, and cannot contain phone number or email" required />
+        </div>
+
+        <!-- Confirm Password Field -->
+        <div class="mb-3">
+            <label for="confirmPassword" class="form-label">Confirm Password:</label>
+            <input type="password" class="form-control" required />
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary m-2">Save</button>
+            <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()">Cancel</button>
+        </div>
+    </form>
+    <p>If you have an account, <a th:href="@{/loginPage}">Login here</a>.</p>
+
+    <!-- SweetAlert Script for Age Validation Error -->
+    <script th:if="${ageValidationError}">
+        $(document).ready(function() {
+            Swal.fire('Error', 'You must be 18 years or older to sign up.', 'error');
+        });
+    </script>
+</div>
+
+<!-- Include SweetAlert JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<!-- Include your custom scripts or validation functions here -->
+<script>
+    // Include your custom scripts or validation functions here
+    function validateForm() {
+        // Add additional validation logic if needed
+        return validateAge();
+    }
+
+    function validateAge() {
+        var dob = document.getElementById('dob').value;
+        var dobDate = new Date(dob);
+        var today = new Date();
+
+        var age = today.getFullYear() - dobDate.getFullYear();
+        var monthDiff = today.getMonth() - dobDate.getMonth();
+
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dobDate.getDate())) {
+            age--;
+        }
+
+        if (age < 18) {
+            alert('You must be 18 years or older to sign up.');
+            return false;
+        }
+
+        return true;
+    }
+
+    function cancelForm() {
+        // Add logic to handle cancellation if needed
+    }
+</script>
+</body>
+</html>

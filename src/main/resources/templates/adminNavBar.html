@@ -1,0 +1,19 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Online Ticket Selling</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a th:href="@{/event}">Event</a></li>
+      <li><a th:href="@{/participant}">Participant</a></li>
+      <li><a th:href="@{/ticket}">Ticket</a></li>
+      <li><a th:href="@{/customer}">Customer</a></li>
+      <li><a th:href="@{/customerTicket}">Customer Ticket</a></li>
+      <li><a th:href="@{/payment}">Payment</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a th:href="@{/logout}" ><span class="glyphicon glyphicon-user"></span> Sign Out</a></li>
+    </ul>
+  </div>
+</nav>

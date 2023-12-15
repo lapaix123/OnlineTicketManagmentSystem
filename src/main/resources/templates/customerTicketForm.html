@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Online Ticket Selling</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<th:block th:include="adminNavBar"></th:block>
+<div class="container-fluid">
+    <div class="text-center"><h2>Customer Ticket Form</h2></div>
+
+    <form method="post" th:action="@{/newCustomerTicket}" th:object="${customerTicket}"
+          style="max-width: 500px; margin: 0 auto;">
+        <input type="hidden" th:field="*{ctId}">
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Customer</label>
+            <div class="col-sm-8">
+                <select th:field="*{customer}" class="form-control" required>
+<!--                    <option th:value="${participant.event?.eventId}" th:text="${participant.event?.eventName}"></option>-->
+                    <th:block th:each="customer : ${customers}">
+                        <option th:value="${customer.customerId}" th:text="${customer.names}"></option>
+                    </th:block>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Ticket</label>
+            <div class="col-sm-8">
+                <select th:field="*{ticket}" class="form-control" required>
+                    <th:block th:each="ticket : ${tickets}">
+                        <option th:value="${ticket.ticketNumber}" th:text="${ticket.ticketName + ' ' + ticket.event.eventName}"></option>
+                    </th:block>
+                </select>
+            </div>
+        </div>
+        <div class="border border-secondary rounded p-3">
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Number of Ticket:</label>
+                <div class="col-sm-8">
+                    <input type="number" th:field="*{numberOfTicket}" class="form-control" required />
+                </div>
+            </div>
+        </div>
+        <div class="border border-secondary rounded p-3">
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Amount:</label>
+                <div class="col-sm-8">
+                    <input type="number" th:field="*{amount}" class="form-control" required />
+                </div>
+            </div>
+
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary m-2">Save</button>
+                <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()">Cancel</button>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+</html>
