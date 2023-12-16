@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
+
 <head>
     <title>Online Ticket Selling</title>
     <meta charset="utf-8">
@@ -11,22 +12,61 @@
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
+
 <body>
 <th:block th:include="navBar1"></th:block>
-<div class="container">
+
+<!-- Content Section -->
+<div class="container mt-4 text-center">
     <h1>Welcome to Online Ticket Selling</h1>
     <p>This is some text.</p>
 </div>
 
+<!-- Carousel Section -->
+<div id="eventCarousel" class="carousel slide mt-4" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <!-- Placeholder images (replace with your own) -->
+        <div class="carousel-item active">
+            <div class="d-flex justify-content-center align-items-center">
+                <img th:src="@{/image/PC (1).jpeg}" class="d-block w-50" alt="Event 1">
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="d-flex justify-content-center align-items-center">
+                <img th:src="@{/image/PC (1).jpg}" class="d-block w-50" alt="Event 2">
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="d-flex justify-content-center align-items-center">
+                <img th:src="@{/image/PC (1).png}" class="d-block w-50" alt="Event 3">
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="d-flex justify-content-center align-items-center">
+                <img th:src="@{/image/PC (2).jpeg}" class="d-block w-50" alt="Event 4">
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="d-flex justify-content-center align-items-center">
+                <img th:src="@{/image/PC (2).jpg}" class="d-block w-50" alt="Event 5">
+            </div>
+        </div>
+        <!-- Add more carousel items with your event images -->
 
+        <!-- Navigation Arrows -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#eventCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#eventCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
 
 <!-- Include SweetAlert JS -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </body>
-</html>
 
-
-
-
-</body>
 </html>
