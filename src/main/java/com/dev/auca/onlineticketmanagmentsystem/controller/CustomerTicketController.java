@@ -54,6 +54,12 @@ public class CustomerTicketController {
         return "redirect:/customerTicket";
     }
 
+    @PostMapping("/buyTicketEvent")
+    public String buyTicketEvent(CustometTicket customerTicket,Model model) {
+        customerTicketService.newTicket(customerTicket);
+        return "redirect:/yourTicket";
+    }
+
     @GetMapping("/deleteCustomerTicket/{ticketId}")
     public String deleteCustomerTicket(@PathVariable Integer ticketId,Model model) {
         customerTicketService.deleteCustomerTicket(ticketId);
@@ -119,8 +125,24 @@ public class CustomerTicketController {
     public String getBuyTicket(HttpSession session, Model model) {
         Customer authanticatedCustomer = (Customer) session.getAttribute("authenticatedCustomer");
         if(authanticatedCustomer != null){
+            model.addAttribute("customerTicket", new CustometTicket());
             model.addAttribute("authenticatedCustomer",authanticatedCustomer);
+            model.addAttribute("ticket",new Ticket());
+            model.addAttribute("tickets",ticketService.allTickets());
             return "buyTicket";
+        }else {
+            return "login";
+        }
+    }
+
+    @GetMapping("/buyTicketEvent/{eventId}")
+    public String getBuyTicketEvent(HttpSession session, Model model,@PathVariable Integer eventId) {
+        Customer authanticatedCustomer = (Customer) session.getAttribute("authenticatedCustomer");
+        if(authanticatedCustomer != null){
+            model.addAttribute("authenticatedCustomer",authanticatedCustomer);
+            model.addAttribute("ticketFound",ticketService.findByEvent(eventId));
+            model.addAttribute("customerTicket",new CustometTicket());
+            return "buyTicketEvent";
         }else {
             return "login";
         }

@@ -11,6 +11,6 @@ public interface TicketService {
     Ticket updateTicket(Ticket ticket);
     Ticket findById(Integer ticketId);
     List<Ticket> allTickets();
-    List<Ticket> findByEvent(Integer eventId);
+    Ticket findByEvent(Integer eventId);
 
 }

@@ -14,13 +14,58 @@
 
 <body>
 <th:block th:include="navBar2"></th:block>
-<div class="container">
-    <h1>Welcome to Online Ticket Selling</h1>
-    <p>customer dashboard</p>
+<div class="container-fluid">
+    <div class="text-center"><h2>Customer Ticket Form</h2></div>
+
+    <form method="post" th:action="@{/buyTicketEvent}" th:object="${customerTicket}"
+          style="max-width: 500px; margin: 0 auto;">
+        <input type="hidden" th:field="*{ctId}">
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Customer</label>
+            <div class="col-sm-8">
+
+                    <select th:field="*{customer}" class="form-control" >
+                        <option th:value="${authenticatedCustomer.customerId}" th:text="${authenticatedCustomer.names}"></option>
+                    </select>
+
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Ticket</label>
+            <div class="col-sm-8">
+                <select th:field="*{ticket}" class="form-control" required>
+                    <th:block th:each="ticket : ${tickets}">
+                        <option th:value="${ticket.ticketNumber}" th:text="${ticket.ticketName + ' ' + ticket.event.eventName}"></option>
+                    </th:block>
+                </select>
+            </div>
+        </div>
+        <div class="border border-secondary rounded p-3">
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Number of Ticket:</label>
+                <div class="col-sm-8">
+                    <input type="number" th:field="*{numberOfTicket}" class="form-control" required />
+                </div>
+            </div>
+        </div>
+        <div class="border border-secondary rounded p-3">
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Amount:</label>
+                <div class="col-sm-8">
+                    <input type="number" th:field="*{amount}" class="form-control" required />
+                </div>
+            </div>
+
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary m-2">Save</button>
+                <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()">Cancel</button>
+            </div>
+        </div>
+
+    </form>
+
 </div>
 
-<!-- Include SweetAlert JS -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </body>
-
 </html>

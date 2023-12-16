@@ -41,7 +41,7 @@ public class TicketImp implements TicketService {
     }
 
     @Override
-    public List<Ticket> findByEvent(Integer eventId) {
+    public Ticket findByEvent(Integer eventId) {
         return dao.findByEvent(eventId);
     }
 }

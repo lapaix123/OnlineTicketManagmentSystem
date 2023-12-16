@@ -7,7 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface TicketDao extends JpaRepository<Ticket,Integer> {
+public interface
+TicketDao extends JpaRepository<Ticket,Integer> {
     @Query("from Ticket where event.eventId =:eventId")
-    List<Ticket> findByEvent(Integer eventId);
+    Ticket findByEvent(Integer eventId);
 }

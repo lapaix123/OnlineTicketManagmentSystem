@@ -30,7 +30,7 @@
                         Location: <span th:text="${event.location}"></span>
                     </p>
                     <!-- Add Buy Ticket button and link -->
-                    <a href="#" class="btn btn-primary btn-buy-ticket" th:attr="data-event-id=${event.eventId}">Buy Ticket</a>
+                    <a th:href="@{/buyTicketEvent/{eventId}(eventId=${event.eventId})}" class="btn btn-primary btn-buy-ticket">Buy Ticket</a>
                 </div>
             </div>
         </th:block>
@@ -39,18 +39,7 @@
 
 <!-- JavaScript for handling button click -->
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.btn-buy-ticket').forEach(function(button) {
-            button.addEventListener('click', function() {
-                // Get the event ID from the data attribute
-                var eventId = this.getAttribute('data-event-id');
 
-                // You can perform further actions, such as redirecting to the ticket purchase page with the event ID
-                // Example: window.location.href = '/buyTicket?eventId=' + eventId;
-                alert('Buy Ticket clicked for Event ID: ' + eventId);
-            });
-        });
-    });
 </script>
 </body>
 </html>
