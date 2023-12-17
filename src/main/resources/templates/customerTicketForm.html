@@ -9,28 +9,72 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container-fluid {
+            margin-top: 30px;
+        }
+
+        .text-center h2 {
+            color: #007bff;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            width: 100%;
+        }
+
+        .border-secondary {
+            border: 1px solid #6c757d;
+        }
+
+        .rounded {
+            border-radius: 5px;
+        }
+
+        .m-2 {
+            margin: 8px;
+        }
+    </style>
 </head>
 <body>
 <th:block th:include="adminNavBar"></th:block>
 <div class="container-fluid">
     <div class="text-center"><h2>Customer Ticket Form</h2></div>
 
-    <form method="post" th:action="@{/newCustomerTicket}" th:object="${customerTicket}"
-          style="max-width: 500px; margin: 0 auto;">
+    <form method="post" th:action="@{/newCustomerTicket}" th:object="${customerTicket}">
         <input type="hidden" th:field="*{ctId}">
+
         <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Customer</label>
+            <label class="col-sm-4 col-form-label">Customer:</label>
             <div class="col-sm-8">
                 <select th:field="*{customer}" class="form-control" required>
-<!--                    <option th:value="${participant.event?.eventId}" th:text="${participant.event?.eventName}"></option>-->
                     <th:block th:each="customer : ${customers}">
                         <option th:value="${customer.customerId}" th:text="${customer.names}"></option>
                     </th:block>
                 </select>
             </div>
         </div>
+
         <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Ticket</label>
+            <label class="col-sm-4 col-form-label">Ticket:</label>
             <div class="col-sm-8">
                 <select th:field="*{ticket}" class="form-control" required>
                     <th:block th:each="ticket : ${tickets}">
@@ -39,6 +83,7 @@
                 </select>
             </div>
         </div>
+
         <div class="border border-secondary rounded p-3">
             <div class="form-group row">
                 <label class="col-sm-4 col-form-label">Number of Ticket:</label>
@@ -47,6 +92,7 @@
                 </div>
             </div>
         </div>
+
         <div class="border border-secondary rounded p-3">
             <div class="form-group row">
                 <label class="col-sm-4 col-form-label">Amount:</label>
@@ -55,16 +101,14 @@
                 </div>
             </div>
 
-
             <div class="text-center">
                 <button type="submit" class="btn btn-primary m-2">Save</button>
                 <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()">Cancel</button>
             </div>
         </div>
-
     </form>
-
 </div>
-
 </body>
 </html>
+
+

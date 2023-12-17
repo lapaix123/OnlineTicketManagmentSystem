@@ -10,28 +10,57 @@
 
     <!-- Include SweetAlert CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container-form {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-title {
+            text-align: center;
+            color: #007bff;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>
 <th:block th:include="navBar2"></th:block>
-<div class="container-fluid">
-    <div class="text-center"><h2>Customer Ticket Form</h2></div>
+<div class="container container-form">
+    <h2 class="form-title">Customer Ticket Form</h2>
 
-    <form method="post" th:action="@{/buyTicketEvent}" th:object="${customerTicket}"
-          style="max-width: 500px; margin: 0 auto;">
+    <form method="post" th:action="@{/buyTicketEvent}" th:object="${customerTicket}">
         <input type="hidden" th:field="*{ctId}">
+
         <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Customer</label>
+            <label class="col-sm-4 col-form-label">Customer:</label>
             <div class="col-sm-8">
-
-                    <select th:field="*{customer}" class="form-control" >
-                        <option th:value="${authenticatedCustomer.customerId}" th:text="${authenticatedCustomer.names}"></option>
-                    </select>
-
+                <select th:field="*{customer}" class="form-control">
+                    <option th:value="${authenticatedCustomer.customerId}" th:text="${authenticatedCustomer.names}"></option>
+                </select>
             </div>
         </div>
+
         <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Ticket</label>
+            <label class="col-sm-4 col-form-label">Ticket:</label>
             <div class="col-sm-8">
                 <select th:field="*{ticket}" class="form-control" required>
                     <th:block th:each="ticket : ${tickets}">
@@ -40,6 +69,7 @@
                 </select>
             </div>
         </div>
+
         <div class="border border-secondary rounded p-3">
             <div class="form-group row">
                 <label class="col-sm-4 col-form-label">Number of Ticket:</label>
@@ -48,6 +78,7 @@
                 </div>
             </div>
         </div>
+
         <div class="border border-secondary rounded p-3">
             <div class="form-group row">
                 <label class="col-sm-4 col-form-label">Amount:</label>
@@ -56,16 +87,13 @@
                 </div>
             </div>
 
-
             <div class="text-center">
                 <button type="submit" class="btn btn-primary m-2">Save</button>
                 <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()">Cancel</button>
             </div>
         </div>
-
     </form>
-
 </div>
-
 </body>
+
 </html>
